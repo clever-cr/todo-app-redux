@@ -1,15 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateTodo } from "../features/todo";
+import { TiTick } from "react-icons/ti";
 import { AiTwotoneDelete, AiTwotoneEdit } from "react-icons/ai";
-const List = ({
-  item,
-  handle,
-  handleChecked,
-  handleDelete,
-  handleUpdate,
-  index,
-}) => {
+const List = ({ item, handleChecked, handleDelete, index }) => {
   const [editInput, setEditInput] = useState("");
   const dispatch = useDispatch();
   return (
@@ -33,13 +27,11 @@ const List = ({
 
         <div className="flex space-x-2">
           <input
-            className="w-[500px] bg-green-400"
             value={editInput}
             onChange={(event) => {
               setEditInput(event.target.value);
             }}
           />
-
           <AiTwotoneEdit
             onClick={() => {
               dispatch(
