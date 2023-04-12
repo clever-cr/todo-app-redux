@@ -5,14 +5,32 @@ import { TiTick } from "react-icons/ti";
 import { AiTwotoneDelete, AiTwotoneEdit } from "react-icons/ai";
 const List = ({ item, handleChecked, handleDelete, index }) => {
   const [editInput, setEditInput] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleChange = (event) => {
+    setEditInput(event.target.value);
+  };
+
+  const handleEdit = () => {
+    setEditInput(item.text);
+    dispatch(
+      updateTodo({
+        index,
+        editInput,
+      })
+    );
+    setIsClicked(!isClicked);
+  };
+
   const dispatch = useDispatch();
   return (
     <div>
       <div className="flex items-center justify-between w-[500px]">
         <label className="flex items-center space-x-2">
           <input
-            type="checkbox"
-            onChange={handleChecked}
+            value={editInput}
+            type={`${isClicked ? "text" : "checkbox"}`}
+            onChange={isClicked ? handleChange : handleChecked}
             checked={item.checked}
           />
 
@@ -21,27 +39,16 @@ const List = ({ item, handleChecked, handleDelete, index }) => {
               <del>{item.text}</del>
             </h1>
           ) : (
-            <h1>{item.text}</h1>
+            !isClicked && <h1>{item.text}</h1>
           )}
         </label>
 
         <div className="flex space-x-2">
-          <input
-            value={editInput}
-            onChange={(event) => {
-              setEditInput(event.target.value);
-            }}
-          />
-          <AiTwotoneEdit
-            onClick={() => {
-              dispatch(
-                updateTodo({
-                  index,
-                  editInput,
-                })
-              );
-            }}
-          />
+          {isClicked ? (
+            <TiTick onClick={handleEdit} />
+          ) : (
+            <AiTwotoneEdit onClick={handleEdit} />
+          )}
           <AiTwotoneDelete onClick={handleDelete} />
         </div>
       </div>
