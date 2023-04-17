@@ -9,7 +9,6 @@ const App = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
   const [input, setInput] = useState("");
-  console.log("input", input);
 
   const handleEnter = (event) => {
     if (event.key === "Enter") {
@@ -57,6 +56,7 @@ const App = () => {
       {todos.map((item, index) => {
         return (
           <List
+            key={index}
             item={item}
             index={item.id}
             handleDelete={() => {

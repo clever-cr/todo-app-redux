@@ -7,9 +7,7 @@ const List = ({ item, handleChecked, handleDelete, index }) => {
   const [editInput, setEditInput] = useState("");
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleChange = (event) => {
-    setEditInput(event.target.value);
-  };
+  const handleChange = (event) => setEditInput(event.target.value);
 
   const handleEdit = () => {
     setEditInput(item.text);
