@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
 import App from "./App";
 import "./index.css";
 import { configureStore } from "@reduxjs/toolkit";
@@ -12,7 +13,9 @@ const store = configureStore({
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>
 );
